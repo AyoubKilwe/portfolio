@@ -1,20 +1,25 @@
+"use client";
+
 import { Mail } from "lucide-react";
 import { Github, Linkedin } from "./icons";
-import { profile } from "@/data/profile";
+import { useContent } from "./content-provider";
 
 export function Footer() {
+  const { settings: s } = useContent();
+  const links = [
+    { href: s.github, Icon: Github, label: "GitHub" },
+    { href: s.linkedin, Icon: Linkedin, label: "LinkedIn" },
+    { href: `mailto:${s.email}`, Icon: Mail, label: "Email" },
+  ].filter((l) => l.href);
+
   return (
     <footer className="relative z-10 border-t border-border">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-8 sm:flex-row sm:px-8">
         <p className="font-mono text-xs text-muted">
-          © {new Date().getFullYear()} {profile.name}. Built with Next.js & Tailwind.
+          © {new Date().getFullYear()} {s.name}. Built with Next.js, Tailwind & Sanity.
         </p>
         <div className="flex items-center gap-1">
-          {[
-            { href: profile.socials.github, Icon: Github, label: "GitHub" },
-            { href: profile.socials.linkedin, Icon: Linkedin, label: "LinkedIn" },
-            { href: profile.socials.email, Icon: Mail, label: "Email" },
-          ].map(({ href, Icon, label }) => (
+          {links.map(({ href, Icon, label }) => (
             <a
               key={label}
               href={href}

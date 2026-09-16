@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    # Rebuild daily so prerendered HTML picks up Sanity edits (the browser already fetches live data)
+    - cron: "0 3 * * *"
 
 permissions:
   contents: read

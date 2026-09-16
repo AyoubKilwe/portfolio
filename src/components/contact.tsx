@@ -4,15 +4,16 @@ import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
 import { Copy, Check, Mail, Send } from "lucide-react";
 import { Github, Linkedin } from "./icons";
-import { profile } from "@/data/profile";
+import { useContent } from "./content-provider";
 import { Reveal, Section, SectionHeading } from "./ui";
 
 export function Contact() {
+  const { settings: s } = useContent();
   const [copied, setCopied] = useState(false);
 
   const copyEmail = async () => {
     try {
-      await navigator.clipboard.writeText(profile.email);
+      await navigator.clipboard.writeText(s.email);
       setCopied(true);
       setTimeout(() => setCopied(false), 1800);
     } catch {
@@ -29,8 +30,14 @@ export function Contact() {
     const message = String(data.get("message") || "");
     const subject = encodeURIComponent(`Project inquiry from ${name}`);
     const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
-    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${s.email}?subject=${subject}&body=${body}`;
   };
+
+  const links = [
+    { href: s.github, Icon: Github, label: "GitHub", handle: s.github?.replace(/^https?:\/\/(www\.)?/, "") },
+    { href: s.linkedin, Icon: Linkedin, label: "LinkedIn", handle: s.name },
+    { href: `mailto:${s.email}`, Icon: Mail, label: "Email", handle: s.email },
+  ].filter((l) => l.href && l.href !== "mailto:undefined");
 
   return (
     <Section id="contact">
@@ -49,18 +56,14 @@ export function Contact() {
                 onClick={copyEmail}
                 className="mt-2 flex items-center gap-2 text-left text-lg font-semibold text-white transition hover:text-accent"
               >
-                {profile.email}
+                {s.email}
                 {copied ? <Check size={16} className="text-emerald-400" /> : <Copy size={16} className="text-muted" />}
               </button>
               <p className="mt-1 text-xs text-muted">{copied ? "Copied to clipboard" : "Click to copy"}</p>
             </div>
 
             <div className="mt-8 space-y-3">
-              {[
-                { href: profile.socials.github, Icon: Github, label: "GitHub", handle: `@${profile.handle}` },
-                { href: profile.socials.linkedin, Icon: Linkedin, label: "LinkedIn", handle: profile.name },
-                { href: profile.socials.email, Icon: Mail, label: "Email", handle: profile.email },
-              ].map(({ href, Icon, label, handle }) => (
+              {links.map(({ href, Icon, label, handle }) => (
                 <a
                   key={label}
                   href={href}

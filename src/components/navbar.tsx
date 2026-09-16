@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Github, Linkedin } from "./icons";
-import { profile } from "@/data/profile";
+import { useContent } from "./content-provider";
 
 const links = [
   { href: "#about", label: "About" },
@@ -15,6 +15,7 @@ const links = [
 ];
 
 export function Navbar() {
+  const { settings: s } = useContent();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -40,7 +41,7 @@ export function Navbar() {
             A
           </span>
           <span className="hidden sm:inline">
-            {profile.shortName}
+            {s.shortName}
             <span className="text-accent animate-blink">_</span>
           </span>
         </a>
@@ -60,7 +61,7 @@ export function Navbar() {
 
         <div className="hidden items-center gap-2 md:flex">
           <a
-            href={profile.socials.github}
+            href={s.github}
             target="_blank"
             rel="noreferrer"
             aria-label="GitHub"
@@ -69,7 +70,7 @@ export function Navbar() {
             <Github size={18} />
           </a>
           <a
-            href={profile.socials.linkedin}
+            href={s.linkedin}
             target="_blank"
             rel="noreferrer"
             aria-label="LinkedIn"

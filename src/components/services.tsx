@@ -1,19 +1,21 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Globe, Smartphone, Server, Sparkles } from "lucide-react";
-import { services } from "@/data/profile";
+import { Globe, Smartphone, Server, Sparkles, Database, Palette, Shield, Cloud } from "lucide-react";
+import { useContent } from "./content-provider";
 import { Reveal, Section, SectionHeading } from "./ui";
 
-const icons = { Globe, Smartphone, Server, Sparkles } as const;
+const icons = { Globe, Smartphone, Server, Sparkles, Database, Palette, Shield, Cloud } as const;
 
 export function Services() {
+  const { services } = useContent();
+  if (!services.length) return null;
   return (
     <Section id="services" className="!pt-0">
       <SectionHeading eyebrow="02 · What I do" title="From idea to production." />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {services.map((s, i) => {
-          const Icon = icons[s.icon as keyof typeof icons];
+          const Icon = icons[s.icon as keyof typeof icons] ?? Globe;
           return (
             <Reveal key={s.title} delay={i}>
               <motion.div whileHover={{ y: -6 }} className="glass glow-border group h-full rounded-2xl p-6">

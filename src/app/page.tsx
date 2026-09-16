@@ -8,10 +8,14 @@ import { Journey } from "@/components/journey";
 import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
 import { Background } from "@/components/background";
+import { ContentProvider } from "@/components/content-provider";
+import { fetchContent } from "@/lib/sanity";
 
-export default function Home() {
+export default async function Home() {
+  const content = await fetchContent();
+
   return (
-    <>
+    <ContentProvider initial={content}>
       <Background />
       <Navbar />
       <main className="relative z-10">
@@ -24,6 +28,6 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </ContentProvider>
   );
 }

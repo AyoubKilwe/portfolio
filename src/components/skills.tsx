@@ -2,15 +2,15 @@
 
 import { motion } from "framer-motion";
 import { Bot } from "lucide-react";
-import { skillGroups } from "@/data/profile";
+import { useContent } from "./content-provider";
 import { Reveal, Section, SectionHeading } from "./ui";
 
-const marquee = [
-  "js", "ts", "react", "nextjs", "vue", "tailwind", "nodejs", "express", "dotnet",
-  "flutter", "dart", "mongodb", "postgres", "mysql", "firebase", "git", "figma", "linux", "vscode", "postman",
-];
-
 export function Skills() {
+  const { skillGroups } = useContent();
+  const marquee = Array.from(
+    new Set(skillGroups.flatMap((g) => g.skills.map((s) => s.icon)).filter((i) => i && i !== "ai")),
+  );
+
   return (
     <Section id="skills">
       <SectionHeading
@@ -34,7 +34,7 @@ export function Skills() {
                     whileHover={{ scale: 1.05 }}
                     className="flex items-center gap-2 rounded-xl border border-border bg-white/[0.03] px-3 py-2 text-sm text-fg"
                   >
-                    {s.icon === "ai" ? (
+                    {!s.icon || s.icon === "ai" ? (
                       <Bot size={18} className="text-accent" />
                     ) : (
                       // eslint-disable-next-line @next/next/no-img-element
@@ -49,20 +49,22 @@ export function Skills() {
         ))}
       </div>
 
-      <Reveal className="mt-12 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
-        <div className="flex w-max gap-6 animate-marquee">
-          {[...marquee, ...marquee].map((i, idx) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              key={idx}
-              src={`https://skillicons.dev/icons?i=${i}`}
-              alt={i}
-              className="h-12 w-12 opacity-70 transition hover:opacity-100"
-              loading="lazy"
-            />
-          ))}
-        </div>
-      </Reveal>
+      {marquee.length > 0 && (
+        <Reveal className="mt-12 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
+          <div className="flex w-max gap-6 animate-marquee">
+            {[...marquee, ...marquee].map((i, idx) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={idx}
+                src={`https://skillicons.dev/icons?i=${i}`}
+                alt={i}
+                className="h-12 w-12 opacity-70 transition hover:opacity-100"
+                loading="lazy"
+              />
+            ))}
+          </div>
+        </Reveal>
+      )}
     </Section>
   );
 }

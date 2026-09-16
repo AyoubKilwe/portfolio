@@ -4,17 +4,15 @@ import { motion } from "framer-motion";
 import { ArrowDown, Download, Mail, MapPin } from "lucide-react";
 import { Github, Linkedin } from "./icons";
 import { useEffect, useState } from "react";
-import { profile } from "@/data/profile";
+import { useContent } from "./content-provider";
 
-const roles = ["Software Engineer", "Full-Stack Developer", "Mobile Developer", "AI Integrator"];
-
-function Typewriter() {
+function Typewriter({ roles }: { roles: string[] }) {
   const [index, setIndex] = useState(0);
   const [text, setText] = useState("");
   const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
-    const current = roles[index];
+    const current = roles[index % roles.length] ?? "";
     const speed = deleting ? 40 : 80;
     const t = setTimeout(() => {
       if (!deleting) {
@@ -31,7 +29,7 @@ function Typewriter() {
       }
     }, speed);
     return () => clearTimeout(t);
-  }, [text, deleting, index]);
+  }, [text, deleting, index, roles]);
 
   return (
     <span className="font-mono text-accent">
@@ -51,31 +49,41 @@ const item = {
 };
 
 export function Hero() {
+  const { settings: s, projects } = useContent();
+  const socials = [
+    { href: s.github, Icon: Github, label: "GitHub" },
+    { href: s.linkedin, Icon: Linkedin, label: "LinkedIn" },
+    { href: `mailto:${s.email}`, Icon: Mail, label: "Email" },
+  ].filter((x) => x.href);
+
   return (
     <section id="top" className="relative mx-auto flex min-h-[100svh] w-full max-w-6xl items-center px-5 pt-28 pb-16 sm:px-8">
       <div className="grid w-full items-center gap-12 md:grid-cols-[1.2fr_0.8fr]">
         <motion.div variants={container} initial="hidden" animate="show">
           <motion.div variants={item} className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-white/[0.03] px-3 py-1.5 text-xs text-muted">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-            </span>
-            Available for new projects
-            <span className="mx-1 text-border">·</span>
-            <MapPin size={12} /> {profile.location}
+            {s.available && (
+              <>
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                </span>
+                Available for new projects
+                <span className="mx-1 text-border">·</span>
+              </>
+            )}
+            <MapPin size={12} /> {s.location}
           </motion.div>
 
           <motion.h1 variants={item} className="text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl md:text-7xl">
-            Hi, I&apos;m <span className="text-gradient">{profile.shortName}</span>.
+            Hi, I&apos;m <span className="text-gradient">{s.shortName}</span>.
           </motion.h1>
 
           <motion.p variants={item} className="mt-4 text-2xl font-semibold text-white/90 sm:text-3xl">
-            <Typewriter />
+            <Typewriter roles={s.roles} />
           </motion.p>
 
           <motion.p variants={item} className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-            {profile.tagline} From pixel-perfect interfaces to secure APIs and LLM-powered assistants, I ship
-            products end to end.
+            {s.tagline}
           </motion.p>
 
           <motion.div variants={item} className="mt-8 flex flex-wrap items-center gap-3">
@@ -86,19 +94,19 @@ export function Hero() {
               View my work
               <ArrowDown size={16} className="transition group-hover:translate-y-0.5" />
             </a>
-            <a
-              href={profile.resumeUrl}
-              download
-              className="inline-flex items-center gap-2 rounded-xl border border-border bg-white/[0.03] px-5 py-3 text-sm font-semibold text-white transition hover:border-accent/50 hover:bg-white/[0.06]"
-            >
-              <Download size={16} /> Download CV
-            </a>
+            {s.resumeUrl && (
+              <a
+                href={s.resumeUrl}
+                target={s.resumeUrl.startsWith("http") ? "_blank" : undefined}
+                rel="noreferrer"
+                download
+                className="inline-flex items-center gap-2 rounded-xl border border-border bg-white/[0.03] px-5 py-3 text-sm font-semibold text-white transition hover:border-accent/50 hover:bg-white/[0.06]"
+              >
+                <Download size={16} /> Download CV
+              </a>
+            )}
             <div className="ml-1 flex items-center gap-1">
-              {[
-                { href: profile.socials.github, Icon: Github, label: "GitHub" },
-                { href: profile.socials.linkedin, Icon: Linkedin, label: "LinkedIn" },
-                { href: profile.socials.email, Icon: Mail, label: "Email" },
-              ].map(({ href, Icon, label }) => (
+              {socials.map(({ href, Icon, label }) => (
                 <a
                   key={label}
                   href={href}
@@ -125,16 +133,16 @@ export function Hero() {
             <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-tr from-accent/20 via-transparent to-accent-3/20" />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={profile.avatar}
-              alt={profile.name}
+              src={s.photoUrl}
+              alt={s.name}
               width={480}
               height={480}
               className="relative aspect-square w-full rounded-[1.6rem] object-cover"
             />
             <div className="glass absolute bottom-6 left-6 right-6 flex items-center justify-between rounded-2xl px-4 py-3">
               <div>
-                <p className="text-sm font-semibold text-white">{profile.name}</p>
-                <p className="font-mono text-[11px] text-muted">@{profile.handle}</p>
+                <p className="text-sm font-semibold text-white">{s.name}</p>
+                <p className="font-mono text-[11px] text-muted">{s.title}</p>
               </div>
               <div className="flex -space-x-2">
                 {["js", "ts", "react", "nodejs"].map((i) => (
@@ -162,8 +170,8 @@ export function Hero() {
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             className="glass absolute -right-6 bottom-24 hidden rounded-2xl px-4 py-3 sm:block"
           >
-            <p className="font-mono text-[11px] text-muted">Open source</p>
-            <p className="text-sm font-semibold text-white">50+ repos</p>
+            <p className="font-mono text-[11px] text-muted">Projects</p>
+            <p className="text-sm font-semibold text-white">{projects.length}+ shipped</p>
           </motion.div>
         </motion.div>
       </div>
