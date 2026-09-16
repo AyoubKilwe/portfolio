@@ -28,14 +28,26 @@ npm run dev      # http://localhost:3000
 npm run build    # static site in ./out
 ```
 
-## ✏️ Editing content
+## ✏️ Editing content (Sanity CMS)
 
-Everything shown on the page (name, bio, stats, skills, projects, journey, links) is data in `src/data/profile.ts`.
-Change the values there and the UI updates. No CMS or database required.
+All content is managed in **Sanity Studio**: https://ayoubkilwe.sanity.studio
+
+| Document | What it controls |
+|:--|:--|
+| Site Settings | name, roles, tagline, photo, about, stats, links, CV (PDF upload) |
+| Projects | title, description, cover image + gallery, highlights, stack, links, featured, order |
+| Skill Groups | skill cards (icon ids from skillicons.dev) |
+| Services | "What I do" cards |
+| Journey | timeline milestones |
+
+Edits are published instantly: the site fetches live data from Sanity's CDN in the browser, and a daily
+GitHub Action rebuild refreshes the prerendered HTML. `src/data/profile.ts` is only a fallback used when
+Sanity has no content.
+
+Studio source lives in `studio/` (`cd studio && npm run dev` locally, `npm run deploy` to publish).
 
 | Asset | Where |
 |:--|:--|
-| CV download | put `cv.pdf` in `public/` |
 | Social preview image | put `og.png` (1200×630) in `public/` |
 | Favicon | `src/app/favicon.ico` |
 
@@ -48,7 +60,7 @@ Pushing to `main` runs `.github/workflows/deploy.yml`, which builds the site and
 
 ## 🧱 Stack
 
-Next.js 16 (App Router, static export) · React 19 · TypeScript · Tailwind CSS 4 · Framer Motion · lucide-react
+Next.js 16 (App Router, static export) · React 19 · TypeScript · Tailwind CSS 4 · Framer Motion · lucide-react · Sanity CMS
 
 ## 📄 License
 
