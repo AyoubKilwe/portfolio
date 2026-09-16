@@ -1,4 +1,4 @@
-import { createClient } from "next-sanity";
+import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url";
 import { profile, projects as localProjects, skillGroups as localSkillGroups, journey as localJourney, services as localServices } from "@/data/profile";
