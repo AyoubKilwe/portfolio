@@ -9,13 +9,17 @@ const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrai
 export const metadata: Metadata = {
   metadataBase: new URL(profile.siteUrl),
   title: {
-    default: `${profile.shortName} · ${profile.title}`,
-    template: `%s · ${profile.shortName}`,
+    default: `${profile.shortName} | ${profile.title} & Full-Stack Developer`,
+    template: `%s | ${profile.shortName}`,
   },
-  description: profile.tagline,
+  description: `${profile.name} (Ayoub Kilwe) is a Software Engineer from Borama, Somaliland building web, mobile and AI-powered products with React, Next.js, React Native, Flutter and Node.js. Portfolio, projects and contact.`,
+  alternates: { canonical: profile.siteUrl },
   keywords: [
     "Ayoub Kilwe",
+    "ayoubkilwe",
     "Ayoub Jama Khalid",
+    "Ayoub Kilwe portfolio",
+    "Ayoub Kilwe software engineer",
     "Software Engineer",
     "Full-Stack Developer",
     "React",
@@ -48,15 +52,31 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: profile.name,
-    alternateName: profile.shortName,
-    jobTitle: profile.title,
-    url: profile.siteUrl,
-    email: profile.email,
-    image: profile.avatar,
-    address: { "@type": "PostalAddress", addressLocality: profile.location },
-    sameAs: [profile.socials.github, profile.socials.linkedin],
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": `${profile.siteUrl}/#person`,
+        name: profile.name,
+        alternateName: [profile.shortName, "ayoubkilwe", "Ayoub Kilwe"],
+        jobTitle: profile.title,
+        description: profile.tagline,
+        url: profile.siteUrl,
+        email: profile.email,
+        image: profile.avatar,
+        address: { "@type": "PostalAddress", addressLocality: "Borama", addressCountry: "SO" },
+        knowsAbout: ["JavaScript", "TypeScript", "React", "Next.js", "React Native", "Flutter", "Node.js", "MongoDB", "AI"],
+        sameAs: [profile.socials.github, profile.socials.linkedin],
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${profile.siteUrl}/#website`,
+        url: profile.siteUrl,
+        name: `${profile.shortName} Portfolio`,
+        description: profile.tagline,
+        publisher: { "@id": `${profile.siteUrl}/#person` },
+        inLanguage: "en",
+      },
+    ],
   };
 
   return (
