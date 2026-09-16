@@ -27,6 +27,9 @@ jobs:
       # Lockfiles generated on Windows/macOS can miss Linux-only optional deps (npm/cli#4828)
       - run: npm install --no-save lightningcss-linux-x64-gnu @tailwindcss/oxide-linux-x64-gnu
       - run: npm run build
+        env:
+          # Remove this when a custom domain (CNAME) is configured in Pages settings
+          BASE_PATH: /portfolio
       - run: touch out/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:

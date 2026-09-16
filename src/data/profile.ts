@@ -7,7 +7,7 @@ export const profile = {
   location: "Borama, Somaliland",
   email: "ayoubkilwe@gmail.com",
   avatar: "https://avatars.githubusercontent.com/u/178882733?v=4",
-  resumeUrl: "/cv.pdf",
+  resumeUrl: "cv.pdf",
   siteUrl: "https://ayoubkilwe.dev",
   socials: {
     github: "https://github.com/AyoubKilwe",
