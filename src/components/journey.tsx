@@ -8,7 +8,7 @@ export function Journey() {
   if (!journey.length) return null;
   return (
     <Section id="journey">
-      <SectionHeading eyebrow="05 · Journey" title="How I got here." />
+      <SectionHeading eyebrow="06 · Journey" title="How I got here." />
       <div className="relative ml-3 border-l border-border pl-8 sm:ml-6 sm:pl-12">
         {journey.map((m, i) => (
           <Reveal key={`${m.period}-${m.title}`} delay={i} className="relative pb-12 last:pb-0">

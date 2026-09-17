@@ -25,6 +25,7 @@ export default defineConfig({
             S.documentTypeListItem("skillGroup").title("Skill Groups"),
             S.documentTypeListItem("service").title("Services"),
             S.documentTypeListItem("milestone").title("Journey"),
+            S.documentTypeListItem("certificate").title("Certificates"),
           ]),
     }),
     visionTool(),

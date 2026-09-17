@@ -52,6 +52,18 @@ export type Project = {
 export type SkillGroup = { title: string; accent: string; skills: { name: string; icon: string }[] };
 export type Service = { title: string; description: string; icon: string };
 export type Milestone = { period: string; title: string; org: string; points: string[] };
+export type Certificate = {
+  title: string;
+  issuer: string;
+  platform?: string;
+  date?: string;
+  description?: string;
+  imageUrl?: string;
+  pdfUrl?: string;
+  verifyUrl?: string;
+  skills: string[];
+  featured: boolean;
+};
 
 export type Content = {
   settings: Settings;
@@ -59,6 +71,7 @@ export type Content = {
   skillGroups: SkillGroup[];
   services: Service[];
   journey: Milestone[];
+  certificates: Certificate[];
   source: "sanity" | "local";
 };
 
@@ -77,7 +90,11 @@ const query = /* groq */ `{
   },
   "skillGroups": *[_type == "skillGroup"] | order(order asc){ title, accent, skills },
   "services": *[_type == "service"] | order(order asc){ title, description, icon },
-  "journey": *[_type == "milestone"] | order(order asc){ period, title, org, points }
+  "journey": *[_type == "milestone"] | order(order asc){ period, title, org, points },
+  "certificates": *[_type == "certificate"] | order(order asc){
+    title, issuer, platform, date, description, verifyUrl, skills, featured,
+    "imageUrl": image.asset->url, "pdfUrl": pdf.asset->url
+  }
 }`;
 
 const gradients = [
@@ -111,6 +128,7 @@ export const localContent: Content = {
   skillGroups: localSkillGroups,
   services: localServices,
   journey: localJourney,
+  certificates: [],
   source: "local",
 };
 
@@ -140,6 +158,7 @@ export async function fetchContent(): Promise<Content> {
       skillGroups: data.skillGroups?.length ? data.skillGroups : localContent.skillGroups,
       services: data.services?.length ? data.services : localContent.services,
       journey: data.journey?.length ? data.journey : localContent.journey,
+      certificates: (data.certificates ?? []).map((c: Certificate) => ({ ...c, skills: c.skills ?? [], featured: !!c.featured })),
       source: "sanity",
     };
   } catch {

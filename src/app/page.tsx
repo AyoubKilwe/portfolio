@@ -5,6 +5,7 @@ import { Services } from "@/components/services";
 import { Skills } from "@/components/skills";
 import { Projects } from "@/components/projects";
 import { Journey } from "@/components/journey";
+import { Certifications } from "@/components/certifications";
 import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
 import { Background } from "@/components/background";
@@ -24,6 +25,7 @@ export default async function Home() {
         <Services />
         <Skills />
         <Projects />
+        <Certifications />
         <Journey />
         <Contact />
       </main>
