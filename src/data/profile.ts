@@ -4,7 +4,7 @@ export const profile = {
   handle: "AyoubKilwe",
   title: "Software Engineer",
   tagline: "I design and build scalable web, mobile and AI-powered products.",
-  location: "Borama, Somaliland",
+  location: "Hargeisa, Somaliland",
   email: "ayoubkilwe@gmail.com",
   avatar: "https://avatars.githubusercontent.com/u/178882733?v=4",
   resumeUrl: "cv.pdf",

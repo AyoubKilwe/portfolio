@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     default: `${profile.shortName} | ${profile.title} & Full-Stack Developer`,
     template: `%s | ${profile.shortName}`,
   },
-  description: `${profile.name} (Ayoub Kilwe) is a Software Engineer from Borama, Somaliland building web, mobile and AI-powered products with React, Next.js, React Native, Flutter and Node.js. Portfolio, projects and contact.`,
+  description: `${profile.name} (Ayoub Kilwe) is a Software Engineer from Hargeisa, Somaliland building web, mobile and AI-powered products with React, Next.js, React Native, Flutter and Node.js. Portfolio, projects and contact.`,
   alternates: { canonical: profile.siteUrl },
   keywords: [
     "Ayoub Kilwe",
@@ -63,7 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         url: profile.siteUrl,
         email: profile.email,
         image: profile.avatar,
-        address: { "@type": "PostalAddress", addressLocality: "Borama", addressCountry: "SO" },
+        address: { "@type": "PostalAddress", addressLocality: "Hargeisa", addressCountry: "SO" },
         knowsAbout: ["JavaScript", "TypeScript", "React", "Next.js", "React Native", "Flutter", "Node.js", "MongoDB", "AI"],
         sameAs: [profile.socials.github, profile.socials.linkedin],
       },
