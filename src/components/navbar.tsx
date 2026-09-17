@@ -34,7 +34,7 @@ export function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={`flex w-full max-w-6xl items-center justify-between rounded-2xl px-4 py-3 transition-all duration-300 sm:px-6 ${
-          scrolled ? "glass shadow-[0_8px_40px_-12px_rgba(56,189,248,0.25)]" : "bg-transparent"
+          scrolled ? "glass glass-blur shadow-[0_8px_40px_-12px_rgba(56,189,248,0.25)]" : "bg-transparent"
         }`}
       >
         <a href="#top" className="group flex items-center gap-2 font-mono text-sm font-semibold text-white">

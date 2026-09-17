@@ -160,22 +160,18 @@ export function Hero() {
               </div>
             </div>
           </div>
-          <motion.div
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          <div
             className="glass absolute -left-6 top-10 hidden rounded-2xl px-4 py-3 sm:block"
           >
             <p className="font-mono text-[11px] text-muted">Stack</p>
             <p className="text-sm font-semibold text-white">Web · Mobile · AI</p>
-          </motion.div>
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          </div>
+          <div
             className="glass absolute -right-6 bottom-24 hidden rounded-2xl px-4 py-3 sm:block"
           >
             <p className="font-mono text-[11px] text-muted">Projects</p>
             <p className="text-sm font-semibold text-white">{projects.length}+ shipped</p>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
 
@@ -184,9 +180,7 @@ export function Hero() {
         aria-label="Scroll down"
         className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 text-muted transition hover:text-white md:block"
       >
-        <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.8, repeat: Infinity }}>
-          <ArrowDown size={20} />
-        </motion.div>
+        <ArrowDown size={20} className="animate-bounce" />
       </a>
     </section>
   );

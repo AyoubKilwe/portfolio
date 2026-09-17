@@ -41,7 +41,7 @@ export function Certifications() {
                 {c.imageUrl ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
-                    src={`${c.imageUrl}?w=1400&auto=format`}
+                    src={`${c.imageUrl}?w=1000&auto=format&q=75`}
                     alt={`${c.title} certificate`}
                     className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
                     loading="lazy"
@@ -113,7 +113,7 @@ export function Certifications() {
                 {c.imageUrl && (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
-                    src={`${c.imageUrl}?w=800&auto=format`}
+                    src={`${c.imageUrl}?w=640&auto=format&q=75`}
                     alt={`${c.title} certificate`}
                     className="aspect-[1.3] w-full bg-white object-cover transition duration-500 group-hover:scale-105"
                     loading="lazy"

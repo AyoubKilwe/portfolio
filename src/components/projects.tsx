@@ -30,7 +30,7 @@ export function Projects() {
                 {p.imageUrl ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
-                    src={`${p.imageUrl}?w=1200&auto=format`}
+                    src={`${p.imageUrl}?w=1000&auto=format&q=75`}
                     alt={p.imageAlt || p.title}
                     className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
                     loading="lazy"
@@ -111,7 +111,7 @@ export function Projects() {
                 {p.imageUrl && (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
-                    src={`${p.imageUrl}?w=800&h=450&fit=crop&auto=format`}
+                    src={`${p.imageUrl}?w=640&h=360&fit=crop&auto=format&q=75`}
                     alt={p.imageAlt || p.title}
                     className="aspect-video w-full object-cover transition duration-500 group-hover:scale-105"
                     loading="lazy"
