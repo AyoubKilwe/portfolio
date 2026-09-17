@@ -1,5 +1,6 @@
 "use client";
 
+import { iconSrc } from "@/lib/icons";
 import { motion } from "framer-motion";
 import { ArrowDown, Download, Mail, MapPin } from "lucide-react";
 import { Github, Linkedin } from "./icons";
@@ -137,6 +138,8 @@ export function Hero() {
               alt={s.name}
               width={480}
               height={480}
+              fetchPriority="high"
+              decoding="async"
               className="relative aspect-square w-full rounded-[1.6rem] object-cover"
             />
             <div className="glass absolute bottom-6 left-6 right-6 flex items-center justify-between rounded-2xl px-4 py-3">
@@ -149,7 +152,7 @@ export function Hero() {
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     key={i}
-                    src={`https://skillicons.dev/icons?i=${i}`}
+                    src={iconSrc(i)}
                     alt={i}
                     className="h-7 w-7 rounded-full border-2 border-bg-soft"
                   />

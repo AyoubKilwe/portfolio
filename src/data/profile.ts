@@ -6,7 +6,7 @@ export const profile = {
   tagline: "I design and build scalable web, mobile and AI-powered products.",
   location: "Hargeisa, Somaliland",
   email: "ayoubkilwe@gmail.com",
-  avatar: "https://avatars.githubusercontent.com/u/178882733?v=4",
+  avatar: "/avatar.jpg",
   resumeUrl: "cv.pdf",
   siteUrl: "https://ayoubkilwe.dev",
   socials: {

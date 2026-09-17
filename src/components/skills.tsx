@@ -1,5 +1,6 @@
 "use client";
 
+import { iconSrc } from "@/lib/icons";
 import { motion } from "framer-motion";
 import { Bot } from "lucide-react";
 import { useContent } from "./content-provider";
@@ -38,7 +39,7 @@ export function Skills() {
                       <Bot size={18} className="text-accent" />
                     ) : (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={`https://skillicons.dev/icons?i=${s.icon}`} alt="" className="h-5 w-5" loading="lazy" />
+                      <img src={iconSrc(s.icon)} alt="" className="h-5 w-5" loading="lazy" />
                     )}
                     {s.name}
                   </motion.li>
@@ -56,7 +57,7 @@ export function Skills() {
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 key={idx}
-                src={`https://skillicons.dev/icons?i=${i}`}
+                src={iconSrc(i)}
                 alt={i}
                 className="h-12 w-12 opacity-70 transition hover:opacity-100"
                 loading="lazy"

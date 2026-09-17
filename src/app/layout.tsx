@@ -62,7 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         description: profile.tagline,
         url: profile.siteUrl,
         email: profile.email,
-        image: profile.avatar,
+        image: new URL(profile.avatar, profile.siteUrl).href,
         address: { "@type": "PostalAddress", addressLocality: "Hargeisa", addressCountry: "SO" },
         knowsAbout: ["JavaScript", "TypeScript", "React", "Next.js", "React Native", "Flutter", "Node.js", "MongoDB", "AI"],
         sameAs: [profile.socials.github, profile.socials.linkedin],
@@ -81,6 +81,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en" className={`${inter.variable} ${jetbrains.variable} dark`}>
+      <head>
+        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://cdn.sanity.io" />
+      </head>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         {children}
