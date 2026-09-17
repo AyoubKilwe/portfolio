@@ -210,23 +210,42 @@ export type Milestone = { period: string; title: string; org: string; points: st
 
 export const journey: Milestone[] = [
   {
-    period: "2026",
-    title: "AI-powered platforms",
-    org: "Full-stack & AI",
+    period: "Jan 2026 – Present",
+    title: "Full Stack Engineer",
+    org: "Loola AI · Part-time · Hybrid",
     points: [
-      "Built multi-role systems with RBAC and real-time dashboards",
-      "Integrated Gemini, Groq and Llama into production apps",
-      "TypeScript-first architecture with Next.js and Node.js",
+      "Build and maintain web and mobile product features across React, React Native and Node.js REST APIs",
+      "Own features from requirements analysis and API integration through testing, release and documentation",
+      "Work on AI-powered product experiences with LLM assistants and role-based access control",
     ],
   },
   {
-    period: "2025",
-    title: "Full-stack & mobile engineering",
-    org: "MERN · React Native · .NET",
+    period: "2026",
+    title: "BSc Software Engineering · Graduated with Honours",
+    org: "Academic achievements",
     points: [
-      "Shipped MERN platforms and React Native apps",
-      "Backend services with Express and ASP.NET Core on MongoDB",
-      "Capstone e-commerce project for a local market",
+      "Graduated with Honours in Software Engineering",
+      "1st place in a university hackathon competition",
+      "University scholarship for strong academic performance",
+      "Contributed to Somali-language data collection for AI systems",
+    ],
+  },
+  {
+    period: "Dec 2025 – Jul 2026",
+    title: "Web Developer",
+    org: "E-xisaabi · Part-time · Remote",
+    points: [
+      "Built responsive, accessible web interfaces focused on clean layout, usability and performance",
+      "Connected front-end views to back-end services and improved user-facing digital services",
+    ],
+  },
+  {
+    period: "Jan 2025 – Dec 2025",
+    title: "Quality Assurance Specialist",
+    org: "Ramaas · Hybrid",
+    points: [
+      "Tested web and mobile features for functionality, usability and quality",
+      "Reported bugs, verified fixes and documented QA results and test cases",
     ],
   },
   {
