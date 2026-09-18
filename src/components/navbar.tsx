@@ -34,9 +34,14 @@ export function Navbar() {
         }`}
       >
         <a href="#top" className="group flex items-center gap-2 font-mono text-sm font-semibold text-white">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-accent to-accent-2 text-bg font-bold">
-            A
-          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/icon-192.png"
+            alt=""
+            width={32}
+            height={32}
+            className="h-8 w-8 rounded-full ring-2 ring-accent/60 transition group-hover:ring-accent"
+          />
           <span className="hidden sm:inline">
             {s.shortName}
             <span className="text-accent animate-blink">_</span>
