@@ -82,6 +82,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.variable} ${jetbrains.variable} dark`}>
       <head>
+        {/* Security headers. GitHub Pages cannot set HTTP headers, so these are declared in the document. */}
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content={[
+            "default-src 'self'",
+            "script-src 'self' 'unsafe-inline'",
+            "style-src 'self' 'unsafe-inline'",
+            "img-src 'self' data: https://cdn.sanity.io",
+            "font-src 'self'",
+            "connect-src 'self' https://2zdu6zb1.apicdn.sanity.io https://2zdu6zb1.api.sanity.io",
+            "object-src 'none'",
+            "base-uri 'self'",
+            "form-action 'self'",
+            "upgrade-insecure-requests",
+          ].join("; ")}
+        />
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
         <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="" />
         <link rel="dns-prefetch" href="https://cdn.sanity.io" />
       </head>

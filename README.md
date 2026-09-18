@@ -1,26 +1,43 @@
 <div align="center">
 
-# Ayoub Kilwe · Portfolio
+# ayoubkilwe.dev
 
-**Personal portfolio of Ayoub Jama Khalid, Software Engineer.**
+**Personal portfolio of Ayoub Jama Khalid (Ayoub Kilwe), Software Engineer.**
 
+[![Live site](https://img.shields.io/badge/Live-ayoubkilwe.dev-0ea5e9?style=for-the-badge&logo=googlechrome&logoColor=white)](https://ayoubkilwe.dev)
 ![Next.js](https://img.shields.io/badge/Next.js-16-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
-![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)
-![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub_Pages-222222?style=for-the-badge&logo=github&logoColor=white)
+![Sanity](https://img.shields.io/badge/CMS-Sanity-F03E2F?style=for-the-badge&logo=sanity&logoColor=white)
 
 </div>
 
-## ✨ Highlights
+## Overview
 
-- Fully static export (`next build` → `out/`), deployable to GitHub Pages, Cloudflare Pages, Netlify or any static host
-- Dark, glassmorphism design with animated hero, typewriter roles, counters, reveal-on-scroll and a skills marquee
-- Sections: Hero · About · Services · Skills · Projects · Journey · Contact
-- SEO ready: Open Graph / Twitter metadata, JSON-LD `Person` schema, semantic HTML
-- All content lives in one file: [`src/data/profile.ts`](src/data/profile.ts)
+A fast, fully static portfolio. Content is managed in a headless CMS (Sanity), the site is prerendered
+with Next.js and served from GitHub Pages on a custom domain.
 
-## 🚀 Getting started
+- **Static export**: `next build` produces plain HTML/CSS/JS in `out/`. No server, nothing to patch.
+- **Loads before JavaScript**: all content is in the server HTML; animations are CSS only.
+- **Self-hosted assets**: skill icons, photo, fonts and CV are served from the site itself.
+- **SEO**: canonical URL, Open Graph / Twitter cards, JSON-LD `Person` + `WebSite`, sitemap, robots.
+- **CMS-driven**: projects, skills, services, journey, certificates and site settings come from Sanity.
+  `src/data/profile.ts` is the fallback used when the CMS has no content.
+
+## Project structure
+
+```
+src/
+  app/            layout (metadata, security headers, JSON-LD), page, global styles
+  components/     hero, about, services, skills, projects, certifications, journey, contact, navbar, footer
+  data/           profile.ts – fallback content
+  lib/            sanity.ts – GROQ query + content merge, icons.ts
+public/           icons/, avatar.jpg, cv.pdf, og.png, robots.txt, sitemap.xml, CNAME
+studio/           Sanity Studio (schemas + config), deployed separately
+.github/workflows deploy.yml – build and publish to GitHub Pages
+```
+
+## Development
 
 ```bash
 npm install
@@ -28,40 +45,20 @@ npm run dev      # http://localhost:3000
 npm run build    # static site in ./out
 ```
 
-## ✏️ Editing content (Sanity CMS)
+## Deployment
 
-All content is managed in **Sanity Studio**: https://ayoubkilwe.sanity.studio
+Every push to `main` runs the GitHub Actions workflow, which builds the site and publishes `out/` to
+GitHub Pages. A daily scheduled run refreshes the prerendered HTML with the latest CMS content
+(the browser also fetches live content on load, so edits are visible immediately).
 
-| Document | What it controls |
-|:--|:--|
-| Site Settings | name, roles, tagline, photo, about, stats, links, CV (PDF upload) |
-| Projects | title, description, cover image + gallery, highlights, stack, links, featured, order |
-| Skill Groups | skill cards (icon ids from skillicons.dev) |
-| Services | "What I do" cards |
-| Journey | timeline milestones |
+## Security notes
 
-Edits are published instantly: the site fetches live data from Sanity's CDN in the browser, and a daily
-GitHub Action rebuild refreshes the prerendered HTML. `src/data/profile.ts` is only a fallback used when
-Sanity has no content.
+- The site is static: no server code, no database credentials, no secrets in this repository.
+- The CMS dataset is read-only to the public and exposes only published content; writes require an
+  authenticated Sanity account. The Studio is a separate, login-protected app.
+- A Content-Security-Policy and referrer policy are declared in the document head.
+- The GitHub Actions workflow runs with least-privilege permissions; dependencies are updated by Dependabot.
 
-Studio source lives in `studio/` (`cd studio && npm run dev` locally, `npm run deploy` to publish).
-
-| Asset | Where |
-|:--|:--|
-| Social preview image | put `og.png` (1200×630) in `public/` |
-| Favicon | `src/app/favicon.ico` |
-
-## 🌐 Deployment
-
-Pushing to `main` runs `.github/workflows/deploy.yml`, which builds the site and publishes `out/` to GitHub Pages.
-
-1. Repository → **Settings → Pages → Source: GitHub Actions**
-2. For a custom domain (e.g. `ayoubkilwe.dev`): add it under **Settings → Pages → Custom domain**, then point the domain's DNS to GitHub Pages and set `siteUrl` in `src/data/profile.ts`.
-
-## 🧱 Stack
-
-Next.js 16 (App Router, static export) · React 19 · TypeScript · Tailwind CSS 4 · Framer Motion · lucide-react · Sanity CMS
-
-## 📄 License
+## License
 
 MIT © Ayoub Jama Khalid
