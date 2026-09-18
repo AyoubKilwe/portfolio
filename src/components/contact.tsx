@@ -22,16 +22,45 @@ export function Contact() {
     }
   };
 
-  // Static site: the form opens the visitor's mail client with a pre-filled message.
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  // Messages are delivered straight to the inbox through Web3Forms (no backend needed).
+  // Without an access key the form falls back to opening the visitor's mail client.
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const data = new FormData(form);
     const name = String(data.get("name") || "");
     const email = String(data.get("email") || "");
     const message = String(data.get("message") || "");
-    const subject = encodeURIComponent(`Project inquiry from ${name}`);
-    const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
-    window.location.href = `mailto:${s.email}?subject=${subject}&body=${body}`;
+    if (String(data.get("company") || "")) return; // honeypot filled by a bot
+
+    if (!WEB3FORMS_KEY) {
+      const subject = encodeURIComponent(`Project inquiry from ${name}`);
+      const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+      window.location.href = `mailto:${s.email}?subject=${subject}&body=${body}`;
+      return;
+    }
+
+    setStatus("sending");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `New message from ${name} via ayoubkilwe.dev`,
+          from_name: "ayoubkilwe.dev",
+          name,
+          email,
+          message,
+        }),
+      });
+      const json = await res.json();
+      if (!res.ok || !json.success) throw new Error(json.message || "Failed");
+      setStatus("sent");
+      form.reset();
+    } catch {
+      setStatus("error");
+    }
   };
 
   const links = [
