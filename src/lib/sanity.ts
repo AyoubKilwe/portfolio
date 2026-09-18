@@ -8,8 +8,10 @@ export const sanityConfig = {
 
 /** Query Sanity's CDN with plain fetch: no client library in the browser bundle. */
 async function sanityQuery<T>(groq: string): Promise<T> {
+  // Build (server) reads the uncached API so prerendered HTML is never stale; the browser uses the CDN.
+  const host = typeof window === "undefined" ? "api" : "apicdn";
   const url =
-    `https://${sanityConfig.projectId}.apicdn.sanity.io/v${sanityConfig.apiVersion}` +
+    `https://${sanityConfig.projectId}.${host}.sanity.io/v${sanityConfig.apiVersion}` +
     `/data/query/${sanityConfig.dataset}?perspective=published&query=${encodeURIComponent(groq)}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Sanity ${res.status}`);
