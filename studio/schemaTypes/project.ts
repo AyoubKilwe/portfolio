@@ -44,6 +44,7 @@ export const project = defineType({
     }),
     defineField({ name: "github", title: "GitHub URL", type: "url" }),
     defineField({ name: "live", title: "Live demo URL", type: "url" }),
+    defineField({ name: "playStore", title: "Google Play URL", type: "url" }),
     defineField({ name: "featured", title: "Featured (large card)", type: "boolean", initialValue: false }),
     defineField({ name: "order", title: "Order (lower shows first)", type: "number", initialValue: 10 }),
   ],

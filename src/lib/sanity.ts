@@ -49,6 +49,7 @@ export type Project = {
   stack: string[];
   github?: string;
   live?: string;
+  playStore?: string;
   featured: boolean;
   gradient: string;
 };
@@ -90,7 +91,7 @@ const query = /* groq */ `{
   "projects": *[_type == "project"] | order(order asc, _createdAt asc){
     "slug": slug.current, title, tagline, description,
     "imageUrl": image.asset->url, "imageAlt": image.alt,
-    emoji, highlights, stack, github, live, featured
+    emoji, highlights, stack, github, live, playStore, featured
   },
   "skillGroups": *[_type == "skillGroup"] | order(order asc){ title, accent, skills },
   "services": *[_type == "service"] | order(order asc){ title, description, icon },

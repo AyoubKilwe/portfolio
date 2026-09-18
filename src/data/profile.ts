@@ -117,14 +117,55 @@ export type Project = {
   description: string;
   highlights: string[];
   stack: string[];
-  github: string;
+  github?: string;
   live?: string;
+  playStore?: string;
   featured: boolean;
   gradient: string;
   emoji: string;
 };
 
 export const projects: Project[] = [
+  {
+    slug: "e-xisaabi",
+    title: "E-xisaabi",
+    tagline: "Financial management platform for businesses and individuals",
+    description:
+      "E-xisaabi (\"Lacagtaada Nidaami\") is a live financial management platform that gives business owners and salary earners a system for their money: income and expense tracking, separating business from personal finances, clear reports, and a 12-month plan with setup, training and support. Available in Somali and English.",
+    highlights: ["Business and personal finance modes", "Income, expense and profit tracking with clear reports", "Bilingual (Somali / English) web app with subscriptions", "Live product with paying customers"],
+    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js"],
+    live: "https://exisaabi.app/en/home",
+    featured: true,
+    gradient: "from-emerald-500/30 via-teal-500/20 to-sky-600/30",
+    emoji: "\ud83d\udcb5",
+  },
+  {
+    slug: "fariid",
+    title: "Fariid",
+    tagline: "AI-powered English learning app (web + Android)",
+    description:
+      "Fariid is an English learning app with an AI coach in your pocket: real conversation practice with instant pronunciation and grammar feedback, self-paced lessons from beginner to advanced, a spaced-repetition vocabulary builder and weekly progress insights. Published on Google Play with a companion website.",
+    highlights: ["AI conversation practice with instant feedback", "Level assessment and adaptive lesson plans", "Spaced-repetition vocabulary builder", "Progress analytics and achievements"],
+    stack: ["React Native", "Next.js", "Node.js", "AI assistant"],
+    live: "https://fariidapp.com/",
+    playStore: "https://go.fariidapp.com/download",
+    featured: true,
+    gradient: "from-sky-500/30 via-indigo-500/20 to-violet-600/30",
+    emoji: "\ud83c\udf93",
+  },
+  {
+    slug: "biyo-dhawr",
+    title: "Biyo Dhawr",
+    tagline: "Water-source monitoring and drought early-warning platform",
+    description:
+      "Open-source platform that lets rural communities report broken or dry water sources by dialling a USSD code (no internet needed), while government and NGO staff verify reports on a live satellite map, rank villages by drought risk with an explainable risk engine plus AI narrative reports, and dispatch repairs. Seeded with 604 real water points. Won 1st place in a university competition.",
+    highlights: ["USSD *999# reporting in Somali, no internet required", "Live map, triage and analytics dashboard for government staff", "Explainable drought-risk engine with AI-written reports", "Real-time updates over Socket.IO; 604 real water points"],
+    stack: ["Next.js", "TypeScript", "Express", "PostgreSQL", "Socket.IO", "React Native", "AI assistant"],
+    github: "https://github.com/biyo-dhawr",
+    featured: true,
+    gradient: "from-cyan-500/30 via-blue-500/20 to-teal-600/30",
+    emoji: "\ud83d\udca7",
+  },
   {
     slug: "ai-food-delivery",
     title: "AI-Powered Food Delivery Platform",
@@ -135,7 +176,7 @@ export const projects: Project[] = [
     stack: ["TypeScript", "Next.js", "React", "Tailwind CSS", "AI assistant"],
     github: "https://github.com/AyoubKilwe/Ai-Powered-multi-role-food-delivery-platform",
     live: "https://ai-powered-multi-role-food-delivery.vercel.app",
-    featured: true,
+    featured: false,
     gradient: "from-orange-500/30 via-rose-500/20 to-purple-600/30",
     emoji: "🍔",
   },
@@ -149,7 +190,7 @@ export const projects: Project[] = [
     stack: ["React", "Node.js", "Express", "MongoDB", "AI assistant"],
     github:
       "https://github.com/AyoubKilwe/Market-Price-Comparison-and-Product-Availability-System-with-AI-Assistance",
-    featured: true,
+    featured: false,
     gradient: "from-emerald-500/30 via-teal-500/20 to-sky-600/30",
     emoji: "🛒",
   },
@@ -162,48 +203,9 @@ export const projects: Project[] = [
     highlights: ["React storefront", "ASP.NET Core REST API", "MongoDB catalog and orders"],
     stack: ["React", "ASP.NET Core", "MongoDB"],
     github: "https://github.com/AyoubKilwe/Smart-Stationary",
-    featured: true,
+    featured: false,
     gradient: "from-violet-500/30 via-indigo-500/20 to-blue-600/30",
     emoji: "🏪",
-  },
-  {
-    slug: "restaurant-app",
-    title: "Restaurant App",
-    tagline: "Cross-platform ordering app in React Native",
-    description:
-      "Cross-platform restaurant ordering mobile app built with React Native, featuring menu browsing, cart and order flow.",
-    highlights: ["Android and iOS from one codebase", "Menu, cart and order flow"],
-    stack: ["React Native", "JavaScript"],
-    github: "https://github.com/AyoubKilwe/Resturent-app",
-    featured: false,
-    gradient: "from-pink-500/30 via-rose-500/20 to-orange-600/30",
-    emoji: "🍽️",
-  },
-  {
-    slug: "image-generator",
-    title: "Image Generator",
-    tagline: "Photo search app with history",
-    description:
-      "Image search mobile app: React Native front end with a Node.js backend powered by the Pexels API, with search history stored in MongoDB.",
-    highlights: ["Pexels API integration", "Search history in MongoDB", "Node.js REST backend"],
-    stack: ["React Native", "Node.js", "Express", "MongoDB"],
-    github: "https://github.com/AyoubKilwe/Image-generator",
-    featured: false,
-    gradient: "from-sky-500/30 via-cyan-500/20 to-teal-600/30",
-    emoji: "🖼️",
-  },
-  {
-    slug: "hami-mini-market",
-    title: "Hami Mini Market",
-    tagline: "E-commerce web app in vanilla JavaScript",
-    description:
-      "E-commerce web app for Hami Mini Market with product filters, shopping cart and checkout flow, built with HTML, CSS and JavaScript.",
-    highlights: ["Product filtering", "Cart and checkout"],
-    stack: ["HTML", "CSS", "JavaScript"],
-    github: "https://github.com/AyoubKilwe/Hami-Mini-Market-full-project-requirments",
-    featured: false,
-    gradient: "from-amber-500/30 via-yellow-500/20 to-lime-600/30",
-    emoji: "🧺",
   },
 ];
 

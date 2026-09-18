@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, ExternalLink, CheckCircle2 } from "lucide-react";
+import { ArrowUpRight, ExternalLink, CheckCircle2, Smartphone } from "lucide-react";
 import { Github } from "./icons";
 import { useContent } from "./content-provider";
 import { Pill, Reveal, Section, SectionHeading } from "./ui";
@@ -75,7 +75,17 @@ export function Projects() {
                       rel="noreferrer"
                       className="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-bg transition hover:bg-accent"
                     >
-                      Live demo <ExternalLink size={15} />
+                      {p.live.includes("github.com") ? "View on GitHub" : "Visit website"} <ExternalLink size={15} />
+                    </a>
+                  )}
+                  {p.playStore && (
+                    <a
+                      href={p.playStore}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 rounded-xl border border-border px-4 py-2.5 text-sm font-semibold text-white transition hover:border-accent/50 hover:bg-white/[0.04]"
+                    >
+                      <Smartphone size={15} /> Google Play
                     </a>
                   )}
                   {p.github && (
