@@ -13,7 +13,7 @@ async function sanityQuery<T>(groq: string): Promise<T> {
   const url =
     `https://${sanityConfig.projectId}.${host}.sanity.io/v${sanityConfig.apiVersion}` +
     `/data/query/${sanityConfig.dataset}?perspective=published&query=${encodeURIComponent(groq)}`;
-  const res = await fetch(url);
+  const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error(`Sanity ${res.status}`);
   return (await res.json()).result as T;
 }
