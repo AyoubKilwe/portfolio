@@ -114,7 +114,7 @@ export const localContent: Content = {
     name: profile.name,
     shortName: profile.shortName,
     title: profile.title,
-    roles: ["Software Engineer", "Full-Stack Developer", "Mobile Developer", "AI Integrator"],
+    roles: ["Software Engineer", "Full-Stack Developer", "Mobile App Developer"],
     tagline: profile.tagline,
     location: profile.location,
     available: true,

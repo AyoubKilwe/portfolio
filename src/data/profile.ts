@@ -3,7 +3,7 @@ export const profile = {
   shortName: "Ayoub Kilwe",
   handle: "AyoubKilwe",
   title: "Software Engineer",
-  tagline: "I design and build scalable web, mobile and AI-powered products.",
+  tagline: "I design and build web, mobile and AI-assisted products end to end: clean interfaces, secure APIs and the databases behind them.",
   location: "Hargeisa, Somaliland",
   email: "ayoubkilwe@gmail.com",
   avatar: "/avatar.jpg",
@@ -15,15 +15,31 @@ export const profile = {
     email: "mailto:ayoubkilwe@gmail.com",
   },
   about: [
-    "I'm a Software Engineer who turns real-world problems into clean, scalable software. I work across the whole stack: polished web and mobile interfaces, secure REST APIs, and the databases behind them.",
-    "Lately I've been focused on AI-powered platforms: multi-role systems with role-based access control, real-time dashboards and LLM assistants built on Gemini, Groq and Llama.",
-    "I'm language-agnostic by principle. I pick the right tool for the product, then ship it with attention to performance, security and developer experience.",
+    "I'm a Software Engineer from Hargeisa who turns real-world problems into clean, reliable software. I work across the whole stack: web and mobile interfaces, secure REST APIs and the databases behind them.",
+    "My recent work includes multi-role platforms with role-based access control, real-time dashboards and AI-powered assistants integrated through modern LLM APIs.",
+    "I pick the right tool for each product and ship it with attention to performance, security and maintainable code."
   ],
   stats: [
-    { label: "Projects shipped", value: 15, suffix: "+" },
-    { label: "Technologies", value: 20, suffix: "+" },
-    { label: "Commits on GitHub", value: 140, suffix: "+" },
-    { label: "Coffee per week", value: 21, suffix: "" },
+    {
+      "label": "Years of coding",
+      "value": 3,
+      "suffix": "+"
+    },
+    {
+      "label": "Projects built",
+      "value": 10,
+      "suffix": "+"
+    },
+    {
+      "label": "Meta certificates",
+      "value": 3,
+      "suffix": ""
+    },
+    {
+      "label": "Technologies",
+      "value": 15,
+      "suffix": "+"
+    }
   ],
 };
 
@@ -40,8 +56,6 @@ export const skillGroups: SkillGroup[] = [
       { name: "TypeScript", icon: "ts" },
       { name: "Python", icon: "py" },
       { name: "Dart", icon: "dart" },
-      { name: "HTML5", icon: "html" },
-      { name: "CSS3", icon: "css" },
     ],
   },
   {
@@ -50,9 +64,8 @@ export const skillGroups: SkillGroup[] = [
     skills: [
       { name: "React", icon: "react" },
       { name: "Next.js", icon: "nextjs" },
-      { name: "Vue.js", icon: "vue" },
+      { name: "HTML & CSS", icon: "html" },
       { name: "Tailwind CSS", icon: "tailwind" },
-      { name: "Vite", icon: "vite" },
     ],
   },
   {
@@ -61,7 +74,6 @@ export const skillGroups: SkillGroup[] = [
     skills: [
       { name: "React Native", icon: "react" },
       { name: "Flutter", icon: "flutter" },
-      { name: "Expo", icon: "react" },
     ],
   },
   {
@@ -70,7 +82,8 @@ export const skillGroups: SkillGroup[] = [
     skills: [
       { name: "Node.js", icon: "nodejs" },
       { name: "Express", icon: "express" },
-      { name: ".NET Core", icon: "dotnet" },
+      { name: "ASP.NET Core", icon: "dotnet" },
+      { name: "Django", icon: "django" },
       { name: "REST APIs", icon: "postman" },
     ],
   },
@@ -79,22 +92,20 @@ export const skillGroups: SkillGroup[] = [
     accent: "from-amber-400 to-orange-300",
     skills: [
       { name: "MongoDB", icon: "mongodb" },
-      { name: "PostgreSQL", icon: "postgres" },
       { name: "MySQL", icon: "mysql" },
+      { name: "PostgreSQL", icon: "postgres" },
       { name: "Firebase", icon: "firebase" },
-      { name: "SQLite", icon: "sqlite" },
     ],
   },
   {
     title: "AI & Tools",
-    accent: "from-lime-400 to-green-300",
+    accent: "from-indigo-400 to-blue-300",
     skills: [
-      { name: "Gemini · Groq · Llama", icon: "ai" },
-      { name: "Git", icon: "git" },
-      { name: "GitHub", icon: "github" },
+      { name: "AI / LLM integration", icon: "ai" },
+      { name: "Git & GitHub", icon: "github" },
       { name: "Figma", icon: "figma" },
-      { name: "Linux", icon: "linux" },
       { name: "VS Code", icon: "vscode" },
+      { name: "Linux", icon: "linux" },
     ],
   },
 ];
@@ -117,16 +128,11 @@ export const projects: Project[] = [
   {
     slug: "ai-food-delivery",
     title: "AI-Powered Food Delivery Platform",
-    tagline: "Multi-role delivery ecosystem with an AI assistant",
+    tagline: "Multi-role delivery platform with an AI assistant",
     description:
-      "A complete food ordering and delivery platform with role-based access control and tailored real-time dashboards for customers, restaurant managers, delivery drivers and administrators, plus an intelligent AI chatbot that helps users order and track.",
-    highlights: [
-      "Secure RBAC with four distinct roles",
-      "Real-time order tracking dashboards",
-      "AI chatbot assistant for ordering support",
-      "Deployed on Vercel with CI from GitHub",
-    ],
-    stack: ["TypeScript", "Next.js", "React", "Node.js", "Express", "MongoDB", "AI"],
+      "A complete food ordering and delivery platform with role-based access control and tailored real-time dashboards for customers, restaurant managers, delivery drivers and administrators, plus an AI chatbot that helps users order and track.",
+    highlights: ["Role-based access for four user types", "Real-time order tracking dashboards", "AI chatbot for ordering support", "Built with Next.js and TypeScript"],
+    stack: ["TypeScript", "Next.js", "React", "Tailwind CSS", "AI assistant"],
     github: "https://github.com/AyoubKilwe/Ai-Powered-multi-role-food-delivery-platform",
     live: "https://ai-powered-multi-role-food-delivery.vercel.app",
     featured: true,
@@ -138,14 +144,9 @@ export const projects: Project[] = [
     title: "Market Price Comparison & Availability",
     tagline: "Find the best price across Hargeisa shops",
     description:
-      "MERN platform that compares market prices and checks product availability across local shops. Features nearby-shop discovery, price alerts, market trend analytics, vendor management and Gemini AI assistance.",
-    highlights: [
-      "Nearby shop discovery and price alerts",
-      "Market trend analytics dashboard",
-      "Vendor management portal",
-      "Gemini AI shopping assistant",
-    ],
-    stack: ["MongoDB", "Express", "React", "Node.js", "Gemini AI"],
+      "MERN platform that compares market prices and checks product availability across local shops. Features nearby-shop discovery, price alerts, market trend analytics, vendor management and an AI shopping assistant.",
+    highlights: ["Nearby shop discovery and price alerts", "Market trend analytics dashboard", "Vendor management portal", "AI shopping assistant"],
+    stack: ["React", "Node.js", "Express", "MongoDB", "AI assistant"],
     github:
       "https://github.com/AyoubKilwe/Market-Price-Comparison-and-Product-Availability-System-with-AI-Assistance",
     featured: true,
@@ -155,11 +156,11 @@ export const projects: Project[] = [
   {
     slug: "smart-stationary",
     title: "Smart Stationary",
-    tagline: "E-commerce with a React front and .NET back",
+    tagline: "E-commerce with a React front end and .NET back end",
     description:
-      "Stationery e-commerce web app with a React + Vite frontend and an ASP.NET Core (C#) backend on MongoDB, featuring product catalog, cart and order management.",
-    highlights: ["React + Vite storefront", "ASP.NET Core REST API", "MongoDB catalog and orders"],
-    stack: ["React", "Vite", "ASP.NET Core", "C#", "MongoDB"],
+      "Stationery e-commerce web app with a React front end and an ASP.NET Core back end on MongoDB, featuring product catalog, cart and order management.",
+    highlights: ["React storefront", "ASP.NET Core REST API", "MongoDB catalog and orders"],
+    stack: ["React", "ASP.NET Core", "MongoDB"],
     github: "https://github.com/AyoubKilwe/Smart-Stationary",
     featured: true,
     gradient: "from-violet-500/30 via-indigo-500/20 to-blue-600/30",
@@ -168,7 +169,7 @@ export const projects: Project[] = [
   {
     slug: "restaurant-app",
     title: "Restaurant App",
-    tagline: "Cross-platform ordering in React Native",
+    tagline: "Cross-platform ordering app in React Native",
     description:
       "Cross-platform restaurant ordering mobile app built with React Native, featuring menu browsing, cart and order flow.",
     highlights: ["Android and iOS from one codebase", "Menu, cart and order flow"],
@@ -183,9 +184,9 @@ export const projects: Project[] = [
     title: "Image Generator",
     tagline: "Photo search app with history",
     description:
-      "Image search mobile app: React Native (Expo) frontend with a Node.js backend powered by the Pexels API, with search history persisted in MongoDB Atlas.",
-    highlights: ["Pexels API integration", "Search history in MongoDB", "Auto-detects backend host from Expo"],
-    stack: ["React Native", "Expo", "Node.js", "Express", "MongoDB"],
+      "Image search mobile app: React Native front end with a Node.js backend powered by the Pexels API, with search history stored in MongoDB.",
+    highlights: ["Pexels API integration", "Search history in MongoDB", "Node.js REST backend"],
+    stack: ["React Native", "Node.js", "Express", "MongoDB"],
     github: "https://github.com/AyoubKilwe/Image-generator",
     featured: false,
     gradient: "from-sky-500/30 via-cyan-500/20 to-teal-600/30",
@@ -194,9 +195,9 @@ export const projects: Project[] = [
   {
     slug: "hami-mini-market",
     title: "Hami Mini Market",
-    tagline: "Capstone e-commerce web app",
+    tagline: "E-commerce web app in vanilla JavaScript",
     description:
-      "Capstone e-commerce web app for Hami Mini Market with product filters, shopping cart and checkout flow.",
+      "E-commerce web app for Hami Mini Market with product filters, shopping cart and checkout flow, built with HTML, CSS and JavaScript.",
     highlights: ["Product filtering", "Cart and checkout"],
     stack: ["HTML", "CSS", "JavaScript"],
     github: "https://github.com/AyoubKilwe/Hami-Mini-Market-full-project-requirments",
@@ -273,12 +274,12 @@ export const services = [
   },
   {
     title: "Backend & APIs",
-    description: "Secure Node.js and .NET services with JWT auth, RBAC and clean database design.",
+    description: "Secure Node.js, Django and ASP.NET Core services with JWT auth, role-based access and clean database design.",
     icon: "Server",
   },
   {
     title: "AI Integration",
-    description: "LLM-powered assistants, chatbots and recommendations using Gemini, Groq and Llama.",
+    description: "AI-powered assistants, chatbots and smart features added to web and mobile products through LLM APIs.",
     icon: "Sparkles",
   },
 ];
