@@ -38,16 +38,23 @@ export const metadata: Metadata = {
     title: `${profile.shortName} · ${profile.title}`,
     description: profile.tagline,
     siteName: profile.shortName,
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: profile.shortName }],
+    images: [{ url: "/og.jpg", secureUrl: `${profile.siteUrl}/og.jpg`, type: "image/jpeg", width: 1200, height: 630, alt: `${profile.shortName} · ${profile.title}` }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${profile.shortName} · ${profile.title}`,
     description: profile.tagline,
-    images: ["/og.png"],
+    images: ["/og.jpg"],
   },
   robots: { index: true, follow: true },
-  icons: { icon: "/favicon.ico" },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

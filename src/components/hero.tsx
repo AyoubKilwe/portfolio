@@ -60,10 +60,8 @@ export function Hero() {
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
                 </span>
                 Available for new projects
-                <span className="mx-1 text-border">·</span>
               </>
             )}
-            <MapPin size={12} /> {s.location}
           </div>
 
           <h1 className="fade-up [animation-delay:80ms] text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl md:text-7xl">
