@@ -4,8 +4,8 @@ import "./globals.css";
 import { profile } from "@/data/profile";
 import { GA_MEASUREMENT_ID } from "@/lib/integrations";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains", display: "swap" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap", preload: false });
+const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains", display: "swap", preload: false });
 
 export const metadata: Metadata = {
   metadataBase: new URL(profile.siteUrl),
