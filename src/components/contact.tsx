@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { Copy, Check, Mail, Send } from "lucide-react";
+import { Copy, Check, Mail, Send, Loader2 } from "lucide-react";
+import { WEB3FORMS_KEY } from "@/lib/integrations";
 import { Github, Linkedin } from "./icons";
 import { useContent } from "./content-provider";
 import { Reveal, Section, SectionHeading } from "./ui";
@@ -9,6 +10,7 @@ import { Reveal, Section, SectionHeading } from "./ui";
 export function Contact() {
   const { settings: s } = useContent();
   const [copied, setCopied] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   const copyEmail = async () => {
     try {
@@ -116,12 +118,35 @@ export function Contact() {
                 className="w-full resize-none rounded-xl border border-border bg-bg/60 px-4 py-3 text-sm text-white outline-none transition placeholder:text-muted/60 focus:border-accent"
               />
             </label>
-            <button
-              type="submit"
-              className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-3.5 text-sm font-semibold text-bg transition hover:bg-accent sm:w-auto"
-            >
-              Send message <Send size={16} />
-            </button>
+            {/* Honeypot: hidden from people, filled by bots */}
+            <input name="company" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+            <div className="mt-5 flex flex-wrap items-center gap-4">
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-3.5 text-sm font-semibold text-bg transition hover:bg-accent disabled:opacity-60 sm:w-auto"
+              >
+                {status === "sending" ? (
+                  <>
+                    Sending <Loader2 size={16} className="animate-spin" />
+                  </>
+                ) : (
+                  <>
+                    Send message <Send size={16} />
+                  </>
+                )}
+              </button>
+              {status === "sent" && (
+                <p className="flex items-center gap-2 text-sm text-emerald-400">
+                  <Check size={16} /> Thanks! Your message is in my inbox. I&apos;ll reply soon.
+                </p>
+              )}
+              {status === "error" && (
+                <p className="text-sm text-rose-400">
+                  Something went wrong. Please email me directly at {s.email}.
+                </p>
+              )}
+            </div>
           </form>
         </Reveal>
       </div>

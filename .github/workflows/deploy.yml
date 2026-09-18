@@ -30,6 +30,10 @@ jobs:
       # Lockfiles generated on Windows/macOS can miss Linux-only optional deps (npm/cli#4828)
       - run: npm install --no-save lightningcss-linux-x64-gnu @tailwindcss/oxide-linux-x64-gnu
       - run: npm run build
+        env:
+          # Public identifiers, set under Settings → Secrets and variables → Actions → Variables
+          NEXT_PUBLIC_WEB3FORMS_KEY: ${{ vars.NEXT_PUBLIC_WEB3FORMS_KEY }}
+          NEXT_PUBLIC_GA_MEASUREMENT_ID: ${{ vars.NEXT_PUBLIC_GA_MEASUREMENT_ID }}
       - run: touch out/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:
