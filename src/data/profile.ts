@@ -5,14 +5,14 @@ export const profile = {
   title: "Software Engineer",
   tagline: "I design and build web, mobile and AI-assisted products end to end: clean interfaces, secure APIs and the databases behind them.",
   location: "Hargeisa, Somaliland",
-  email: "ayoubkilwe@gmail.com",
+  email: "contact@ayoubkilwe.dev",
   avatar: "/avatar.jpg",
   resumeUrl: "cv.pdf",
   siteUrl: "https://ayoubkilwe.dev",
   socials: {
     github: "https://github.com/AyoubKilwe",
     linkedin: "https://www.linkedin.com/in/ayoub-kilwe-51b40a390",
-    email: "mailto:ayoubkilwe@gmail.com",
+    email: "mailto:contact@ayoubkilwe.dev",
   },
   about: [
     "I'm a Software Engineer from Hargeisa who turns real-world problems into clean, reliable software. I work across the whole stack: web and mobile interfaces, secure REST APIs and the databases behind them.",
