@@ -1,7 +1,6 @@
 "use client";
 
 import { iconSrc } from "@/lib/icons";
-import { motion } from "framer-motion";
 import { Bot } from "lucide-react";
 import { useContent } from "./content-provider";
 import { Reveal, Section, SectionHeading } from "./ui";
@@ -30,10 +29,9 @@ export function Skills() {
               </div>
               <ul className="flex flex-wrap gap-2">
                 {g.skills.map((s) => (
-                  <motion.li
+                  <li
                     key={s.name}
-                    whileHover={{ scale: 1.05 }}
-                    className="flex items-center gap-2 rounded-xl border border-border bg-white/[0.03] px-3 py-2 text-sm text-fg"
+                    className="transition-transform duration-200 hover:scale-105 flex items-center gap-2 rounded-xl border border-border bg-white/[0.03] px-3 py-2 text-sm text-fg"
                   >
                     {!s.icon || s.icon === "ai" ? (
                       <Bot size={18} className="text-accent" />
@@ -42,7 +40,7 @@ export function Skills() {
                       <img src={iconSrc(s.icon)} alt="" className="h-5 w-5" loading="lazy" />
                     )}
                     {s.name}
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
             </div>

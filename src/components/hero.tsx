@@ -1,7 +1,6 @@
 "use client";
 
 import { iconSrc } from "@/lib/icons";
-import { motion } from "framer-motion";
 import { ArrowDown, Download, Mail, MapPin } from "lucide-react";
 import { Github, Linkedin } from "./icons";
 import { useEffect, useState } from "react";
@@ -9,7 +8,8 @@ import { useContent } from "./content-provider";
 
 function Typewriter({ roles }: { roles: string[] }) {
   const [index, setIndex] = useState(0);
-  const [text, setText] = useState("");
+  // Start with the first role already typed so the server HTML is never empty.
+  const [text, setText] = useState(roles[0] ?? "");
   const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
@@ -40,15 +40,6 @@ function Typewriter({ roles }: { roles: string[] }) {
   );
 }
 
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12 } },
-};
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const } },
-};
-
 export function Hero() {
   const { settings: s, projects } = useContent();
   const socials = [
@@ -60,8 +51,8 @@ export function Hero() {
   return (
     <section id="top" className="relative mx-auto flex min-h-[100svh] w-full max-w-6xl items-center px-5 pt-28 pb-16 sm:px-8">
       <div className="grid w-full items-center gap-12 md:grid-cols-[1.2fr_0.8fr]">
-        <motion.div variants={container} initial="hidden" animate="show">
-          <motion.div variants={item} className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-white/[0.03] px-3 py-1.5 text-xs text-muted">
+        <div>
+          <div className="fade-up mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-white/[0.03] px-3 py-1.5 text-xs text-muted">
             {s.available && (
               <>
                 <span className="relative flex h-2 w-2">
@@ -73,21 +64,21 @@ export function Hero() {
               </>
             )}
             <MapPin size={12} /> {s.location}
-          </motion.div>
+          </div>
 
-          <motion.h1 variants={item} className="text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl md:text-7xl">
+          <h1 className="fade-up [animation-delay:80ms] text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl md:text-7xl">
             Hi, I&apos;m <span className="text-gradient">{s.shortName}</span>.
-          </motion.h1>
+          </h1>
 
-          <motion.p variants={item} className="mt-4 text-2xl font-semibold text-white/90 sm:text-3xl">
+          <p className="fade-up [animation-delay:160ms] mt-4 text-2xl font-semibold text-white/90 sm:text-3xl">
             <Typewriter roles={s.roles} />
-          </motion.p>
+          </p>
 
-          <motion.p variants={item} className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
+          <p className="fade-up [animation-delay:240ms] mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
             {s.tagline}
-          </motion.p>
+          </p>
 
-          <motion.div variants={item} className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="fade-up [animation-delay:320ms] mt-8 flex flex-wrap items-center gap-3">
             <a
               href="#projects"
               className="group inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-bg transition hover:bg-accent"
@@ -120,16 +111,11 @@ export function Hero() {
                 </a>
               ))}
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto w-full max-w-sm"
-        >
-          <div className="absolute inset-0 -z-10 rounded-[2rem] bg-gradient-to-tr from-accent via-accent-2 to-accent-3 opacity-40 blur-3xl" />
+        <div className="fade-up [animation-delay:200ms] relative mx-auto w-full max-w-sm">
+          <div className="absolute -inset-8 -z-10 rounded-full [background:radial-gradient(closest-side,rgba(56,189,248,0.28),transparent)]" />
           <div className="glass relative overflow-hidden rounded-[2rem] p-3">
             <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-tr from-accent/20 via-transparent to-accent-3/20" />
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -172,7 +158,7 @@ export function Hero() {
             <p className="font-mono text-[11px] text-muted">Projects</p>
             <p className="text-sm font-semibold text-white">{projects.length}+ shipped</p>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       <a

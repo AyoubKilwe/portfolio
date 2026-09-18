@@ -1,28 +1,40 @@
 "use client";
 
-import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { useContent } from "./content-provider";
 import { Reveal, Section, SectionHeading } from "./ui";
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
-  const mv = useMotionValue(0);
-  const spring = useSpring(mv, { duration: 1800, bounce: 0 });
 
+  // Server HTML shows the final number; JS only adds a short count-up when it scrolls into view.
   useEffect(() => {
-    if (inView) mv.set(value);
-  }, [inView, mv, value]);
-
-  useEffect(() => {
-    const unsub = spring.on("change", (v) => {
-      if (ref.current) ref.current.textContent = Math.round(v).toString() + (suffix ?? "");
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const io = new IntersectionObserver((entries) => {
+      if (!entries.some((e) => e.isIntersecting)) return;
+      io.disconnect();
+      const start = performance.now();
+      const dur = 1200;
+      const tick = (now: number) => {
+        const t = Math.min(1, (now - start) / dur);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = Math.round(eased * value) + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
     });
-    return unsub;
-  }, [spring, suffix]);
+    io.observe(el);
+    return () => io.disconnect();
+  }, [value, suffix]);
 
-  return <span ref={ref}>0{suffix ?? ""}</span>;
+  return (
+    <span ref={ref}>
+      {value}
+      {suffix}
+    </span>
+  );
 }
 
 export function About() {
@@ -41,12 +53,12 @@ export function About() {
         <div className="grid grid-cols-2 gap-4">
           {settings.stats.map((s, i) => (
             <Reveal key={s.label} delay={i}>
-              <motion.div whileHover={{ y: -4 }} className="glass glow-border h-full rounded-2xl p-5">
+              <div className="glass glow-border h-full rounded-2xl p-5 transition-transform duration-300 hover:-translate-y-1">
                 <p className="text-3xl font-bold text-white sm:text-4xl">
                   <Counter value={s.value} suffix={s.suffix ?? ""} />
                 </p>
                 <p className="mt-1 text-sm text-muted">{s.label}</p>
-              </motion.div>
+              </div>
             </Reveal>
           ))}
         </div>

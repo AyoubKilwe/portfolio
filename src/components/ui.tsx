@@ -1,16 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
-import type { ReactNode } from "react";
-
-export const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: (i: number = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 },
-  }),
-};
+import { useEffect, useRef, type ReactNode } from "react";
 
 export function Reveal({
   children,
@@ -21,17 +11,33 @@ export function Reveal({
   className?: string;
   delay?: number;
 }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Content is visible in the server HTML. Once JS runs, elements still below the fold
+  // get a small fade-up when they scroll into view. Nothing is ever hidden without JS.
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (el.getBoundingClientRect().top < window.innerHeight) return;
+    el.classList.add("reveal-hidden");
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          el.classList.add("reveal-in");
+          io.disconnect();
+        }
+      },
+      { rootMargin: "-40px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <motion.div
-      className={className}
-      variants={fadeUp}
-      custom={delay}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: "-80px" }}
-    >
+    <div ref={ref} className={className} style={{ transitionDelay: `${Math.min(delay, 6) * 70}ms` }}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 

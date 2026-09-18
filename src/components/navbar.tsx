@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Github, Linkedin } from "./icons";
 import { useContent } from "./content-provider";
@@ -29,11 +28,8 @@ export function Navbar() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4">
-      <motion.nav
-        initial={{ y: -40, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`flex w-full max-w-6xl items-center justify-between rounded-2xl px-4 py-3 transition-all duration-300 sm:px-6 ${
+      <nav
+        className={`fade-down flex w-full max-w-6xl items-center justify-between rounded-2xl px-4 py-3 transition-all duration-300 sm:px-6 ${
           scrolled ? "glass glass-blur shadow-[0_8px_40px_-12px_rgba(56,189,248,0.25)]" : "bg-transparent"
         }`}
       >
@@ -94,16 +90,10 @@ export function Navbar() {
         >
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
-      </motion.nav>
+      </nav>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="glass absolute top-20 left-4 right-4 rounded-2xl p-4 md:hidden"
-          >
+      {open && (
+          <div className="fade-down glass absolute top-20 left-4 right-4 rounded-2xl p-4 md:hidden">
             <ul className="flex flex-col">
               {links.map((l) => (
                 <li key={l.href}>
@@ -126,9 +116,8 @@ export function Navbar() {
                 </a>
               </li>
             </ul>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
     </header>
   );
 }

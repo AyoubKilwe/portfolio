@@ -1,6 +1,3 @@
-import { createClient } from "@sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
-import type { SanityImageSource } from "@sanity/image-url";
 import { profile, projects as localProjects, skillGroups as localSkillGroups, journey as localJourney, services as localServices } from "@/data/profile";
 
 export const sanityConfig = {
@@ -9,10 +6,15 @@ export const sanityConfig = {
   apiVersion: "2025-01-01",
 };
 
-export const client = createClient({ ...sanityConfig, useCdn: true, perspective: "published" });
-
-const builder = imageUrlBuilder(client);
-export const urlFor = (source: SanityImageSource) => builder.image(source).auto("format");
+/** Query Sanity's CDN with plain fetch: no client library in the browser bundle. */
+async function sanityQuery<T>(groq: string): Promise<T> {
+  const url =
+    `https://${sanityConfig.projectId}.apicdn.sanity.io/v${sanityConfig.apiVersion}` +
+    `/data/query/${sanityConfig.dataset}?perspective=published&query=${encodeURIComponent(groq)}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Sanity ${res.status}`);
+  return (await res.json()).result as T;
+}
 
 /* ---------- Types ---------- */
 export type Settings = {
@@ -135,7 +137,8 @@ export const localContent: Content = {
 /* ---------- Fetch (build time + runtime) ---------- */
 export async function fetchContent(): Promise<Content> {
   try {
-    const data = await client.fetch(query);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const data = await sanityQuery<any>(query);
     if (!data?.settings && !(data?.projects?.length)) return localContent;
     const s = data.settings ?? {};
     return {

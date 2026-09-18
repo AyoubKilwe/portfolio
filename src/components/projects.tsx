@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowUpRight, ExternalLink, CheckCircle2 } from "lucide-react";
 import { Github } from "./icons";
 import { useContent } from "./content-provider";
@@ -22,9 +21,8 @@ export function Projects() {
       <div className="space-y-6">
         {featured.map((p, i) => (
           <Reveal key={p.slug} delay={i}>
-            <motion.article
-              whileHover={{ y: -4 }}
-              className="glass glow-border group grid overflow-hidden rounded-3xl md:grid-cols-[1fr_1.1fr]"
+            <article
+              className="transition-transform duration-300 hover:-translate-y-1 glass glow-border group grid overflow-hidden rounded-3xl md:grid-cols-[1fr_1.1fr]"
             >
               <div className={`relative min-h-[240px] overflow-hidden bg-gradient-to-br ${p.gradient}`}>
                 {p.imageUrl ? (
@@ -92,7 +90,7 @@ export function Projects() {
                   )}
                 </div>
               </div>
-            </motion.article>
+            </article>
           </Reveal>
         ))}
       </div>
@@ -101,12 +99,11 @@ export function Projects() {
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {more.map((p, i) => (
             <Reveal key={p.slug} delay={i}>
-              <motion.a
+              <a
                 href={p.live || p.github || "#"}
                 target="_blank"
                 rel="noreferrer"
-                whileHover={{ y: -6 }}
-                className="glass glow-border group flex h-full flex-col overflow-hidden rounded-2xl"
+                className="transition-transform duration-300 hover:-translate-y-1.5 glass glow-border group flex h-full flex-col overflow-hidden rounded-2xl"
               >
                 {p.imageUrl && (
                   // eslint-disable-next-line @next/next/no-img-element
@@ -134,7 +131,7 @@ export function Projects() {
                     ))}
                   </div>
                 </div>
-              </motion.a>
+              </a>
             </Reveal>
           ))}
         </div>

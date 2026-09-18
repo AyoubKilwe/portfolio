@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Globe, Smartphone, Server, Sparkles, Database, Palette, Shield, Cloud } from "lucide-react";
 import { useContent } from "./content-provider";
 import { Reveal, Section, SectionHeading } from "./ui";
@@ -18,13 +17,13 @@ export function Services() {
           const Icon = icons[s.icon as keyof typeof icons] ?? Globe;
           return (
             <Reveal key={s.title} delay={i}>
-              <motion.div whileHover={{ y: -6 }} className="glass glow-border group h-full rounded-2xl p-6">
+              <div className="transition-transform duration-300 hover:-translate-y-1.5 glass glow-border group h-full rounded-2xl p-6">
                 <div className="mb-5 grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-accent/20 to-accent-2/20 text-accent transition group-hover:from-accent group-hover:to-accent-2 group-hover:text-bg">
                   <Icon size={20} />
                 </div>
                 <h3 className="text-lg font-semibold text-white">{s.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{s.description}</p>
-              </motion.div>
+              </div>
             </Reveal>
           );
         })}

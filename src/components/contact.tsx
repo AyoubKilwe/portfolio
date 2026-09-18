@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { motion } from "framer-motion";
 import { Copy, Check, Mail, Send } from "lucide-react";
 import { Github, Linkedin } from "./icons";
 import { useContent } from "./content-provider";
@@ -117,13 +116,12 @@ export function Contact() {
                 className="w-full resize-none rounded-xl border border-border bg-bg/60 px-4 py-3 text-sm text-white outline-none transition placeholder:text-muted/60 focus:border-accent"
               />
             </label>
-            <motion.button
-              whileTap={{ scale: 0.98 }}
+            <button
               type="submit"
               className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-3.5 text-sm font-semibold text-bg transition hover:bg-accent sm:w-auto"
             >
               Send message <Send size={16} />
-            </motion.button>
+            </button>
           </form>
         </Reveal>
       </div>
